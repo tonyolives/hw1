@@ -16,8 +16,33 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+  // first, base case (if no more nodes available)
+  if (in == nullptr) {
+    return;
+  }
+
+  // need to keep track of next node before modifying in
+  Node* nextNode = in->next;
+
+  // if in value even
+  if (in->value % 2 == 0) {
+    in->next = evens; // insert in front
+    evens = in; // move evens pointer
+  }
+
+  // if in value odd
+  else {
+    in->next = odds; // insert in front
+    odds = in; // move odds pointer
+  }
+
+  // call recursive function
+  split(nextNode, odds, evens);
 }
 
 /* If you needed a helper function, write it here */
+
+// {1, 2, 5, 6, 7, 8, 11, 14, 16, 19, 25, 27}
+
+// {1, 5, 7, 11, 19, 25, 27}
+// {2, 6, 8, 14, 16}
