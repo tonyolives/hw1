@@ -24,6 +24,9 @@ void split(Node*& in, Node*& odds, Node*& evens)
   // need to keep track of next node before modifying in
   Node* nextNode = in->next;
 
+  // remove node
+  in->next = nullptr;
+
   // if in value even
   if (in->value % 2 == 0) {
     in->next = evens; // insert in front
@@ -36,8 +39,10 @@ void split(Node*& in, Node*& odds, Node*& evens)
     odds = in; // move odds pointer
   }
 
+  in = nextNode;
+
   // call recursive function
-  split(nextNode, odds, evens);
+  split(in, odds, evens);
 }
 
 /* If you needed a helper function, write it here */
